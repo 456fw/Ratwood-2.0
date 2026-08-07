@@ -69,20 +69,16 @@
 	if(breasts)
 		old_breast_size = breasts.breast_size
 
-	// 中文：各增大 2 级（钳制在合法范围内）。
-	var/grow_amount = 2
+	// 中文：直接设为最大尺寸。
 	if(penis)
-		var/new_size = clamp(penis.penis_size + grow_amount, MIN_PENIS_SIZE, MAX_PENIS_SIZE)
-		penis_gained = new_size - penis.penis_size
-		penis.penis_size = new_size
+		penis_gained = MAX_PENIS_SIZE - penis.penis_size
+		penis.penis_size = MAX_PENIS_SIZE
 	if(testicles)
-		var/new_size = clamp(testicles.ball_size + grow_amount, MIN_TESTICLES_SIZE, MAX_TESTICLES_SIZE)
-		ball_gained = new_size - testicles.ball_size
-		testicles.ball_size = new_size
+		ball_gained = MAX_TESTICLES_SIZE - testicles.ball_size
+		testicles.ball_size = MAX_TESTICLES_SIZE
 	if(breasts)
-		var/new_size = clamp(breasts.breast_size + grow_amount, MIN_BREASTS_SIZE, MAX_BREASTS_SIZE)
-		breast_gained = new_size - breasts.breast_size
-		breasts.breast_size = new_size
+		breast_gained = MAX_BREASTS_SIZE - breasts.breast_size
+		breasts.breast_size = MAX_BREASTS_SIZE
 	// 中文：更新乳汁容量以匹配新的乳房尺寸。
 	if(breasts && breast_gained > 0)
 		breasts.milk_max = max(75, breasts.breast_size * 100)
@@ -160,9 +156,9 @@
 	..()
 
 // ============================================================================
-// 配方：★按气味等级①★ 5 级"sweet berries" + 底料(乳汁 30 + 清水 30) → 丰盈药水 30。技能：学徒。
+// 配方：★按气味等级①★ 5 级"甜浆果"气味 + 底料(乳汁 30 + 清水 30) → 丰盈药水 30。技能：学徒。
 // ----------------------------------------------------------------------------
-//   · "sweet berries" 是原版【生命灵药】(health_potion)的 smells_like。
+//   · "甜浆果"是原版【生命灵药】(health_potion)的 smells_like。
 //     气味来源（纯草药，简单易得）：
 //       symphitum (major=3pt) + taraxacum (med=2pt) = 5pt 刚好达标。
 //       也可以 urtica(major=3) + 任意带 health_potion minor(1pt) 的草药。
@@ -171,7 +167,7 @@
 // ============================================================================
 /datum/alch_refining_formula/enlargement
 	name = "丰盈药水"
-	required_scent = "sweet berries"
+	required_scent = "甜浆果"
 	required_scent_points = 5								// 1 symphitum(3) + 1 taraxacum(2) = 5.
 	required_base = list(/datum/reagent/consumable/milk = 30,
 						/datum/reagent/water = 30)			// 60 total = waterneed minimum.
