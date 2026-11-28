@@ -220,6 +220,8 @@
 	var/lactating = FALSE
 	/// Waiting to start lactating once the owner becomes pregnant
 	var/lactates_on_impregnation = FALSE
+	/// Whether these breasts have an extra penetrating orifice (the "milk hole").
+	var/has_milk_hole = FALSE
 	var/milk_stored = 0
 	var/milk_max = 75
 	var/branded_writing = ""

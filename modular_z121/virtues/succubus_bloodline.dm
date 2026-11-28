@@ -170,6 +170,11 @@
 /datum/sex_controller/cum_into(oral = FALSE, mob/living/carbon/human/splashed_user = null, datum/sex_action/knot_action = null, knot_swap_roles = FALSE, mob/living/carbon/human/knot_btm = null, orifice = SEX_PART_NULL, skip_knot_try = FALSE, consume_charge = TRUE, source_part = SEX_PART_NULL)
 	. = ..()                                                                   // 先执行原版内射结算，绝不破坏既有行为。
 
+	// 为什么排除乳穴：乳穴（Milk hole）不是生殖道，内射进乳穴不应计入魅魔的
+	//   "被内射"次数，也不应触发进化/餍足/魅魔之吻。
+	if(orifice & SEX_PART_BREAST_HOLE)
+		return
+
 	// 为什么取 splashed_user||target：与原版 effective_target 取法一致，
 	//   即"真正被内射的那一方"。
 	var/mob/living/carbon/human/receiver = splashed_user || target            // 接受方（可能是魅魔）。

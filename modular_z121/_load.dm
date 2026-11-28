@@ -397,3 +397,9 @@
 #include "guide_browser/guide_browser.dm"
 #include "guide_browser/guide_catalog_admin.dm"
 #include "kaiser_wilhelm/fortress.dm"
+// 乳穴（Milk hole）ERP 动作：角色在「Features → Breasts」开启乳穴后，ERP 面板新增
+// 插入/双屌/骑乘/手指/自慰/吸吮/强制插入等动作。动作由 typesof(/datum/sex_action) 自动注册。
+#include "sex/breast_hole_actions.dm"
+// 乳穴 × 玩具/尾口互动：手持或腰带假阳具插入乳穴、尾巴插入乳穴、尾口吸吮乳穴。
+#include "sex/breast_hole_toys.dm"
+#include "sex/breast_hole_tailmaw.dm"

@@ -510,6 +510,8 @@
 		var/status_type = !oral ? /datum/status_effect/facial/internal : /datum/status_effect/facial
 		if(!oral && (orifice & SEX_PART_TAIL_MAW))
 			status_type = /datum/status_effect/facial/internal/tailmaw
+		else if(!oral && (orifice & SEX_PART_BREAST_HOLE))
+			status_type = /datum/status_effect/facial/internal/breasthole
 		var/datum/status_effect/facial/splashed_type = splashed_user.has_status_effect(status_type)
 		if(!splashed_type)
 			splashed_user.apply_status_effect(status_type)
@@ -629,6 +631,9 @@
 /datum/status_effect/facial/internal/tailmaw
 	id = "tailmaw_internal"
 
+/datum/status_effect/facial/internal/breasthole
+	id = "breasthole_internal"
+
 /datum/status_effect/facial/external
 	id = "cumshot"
 	alert_type = null // don't show an alert on screen
@@ -692,7 +697,8 @@
 
 /datum/status_effect/creampie_leak/tick()
 	var/tailmaw_leaking = (orifice & SEX_PART_TAIL_MAW) && get_manticore_tail(owner)
-	if(!tailmaw_leaking && !owner?.sexcon?.bottom_exposed && !get_location_accessible(owner, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
+	var/breast_hole_leaking = (orifice & SEX_PART_BREAST_HOLE) && get_location_accessible(owner, BODY_ZONE_CHEST, skipundies = TRUE)
+	if(!tailmaw_leaking && !breast_hole_leaking && !owner?.sexcon?.bottom_exposed && !get_location_accessible(owner, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 		return
 	var/cur_loc = get_turf(owner)
 	if(!cur_loc || !isturf(cur_loc))

@@ -61,11 +61,13 @@
 /datum/organ_dna/breasts
 	var/breast_size = DEFAULT_BREASTS_SIZE
 	var/lactation_mode = LACTATION_DISABLED
+	var/has_milk_hole = FALSE
 
 /datum/organ_dna/breasts/imprint_organ(obj/item/organ/organ)
 	..()
 	var/obj/item/organ/breasts/breasts_organ = organ
 	breasts_organ.breast_size = breast_size
+	breasts_organ.has_milk_hole = has_milk_hole
 	breasts_organ.lactating = (lactation_mode == LACTATION_ENABLED)
 	breasts_organ.lactates_on_impregnation = (lactation_mode == LACTATION_AFTER_IMPREGNATION)
 	breasts_organ.milk_max = max(75, breasts_organ.breast_size * 100)

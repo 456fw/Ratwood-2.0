@@ -121,6 +121,10 @@
 			return FALSE
 	if((parts_to_check & SEX_PART_BREASTS) && !actor.getorganslot(ORGAN_SLOT_BREASTS))
 		return FALSE
+	if(parts_to_check & SEX_PART_BREAST_HOLE)
+		var/obj/item/organ/breasts/milk_hole_breasts = actor.getorganslot(ORGAN_SLOT_BREASTS)
+		if(!milk_hole_breasts?.has_milk_hole)
+			return FALSE
 	if(parts_to_check & SEX_PART_JAWS)
 		if(self && !is_part_self_accessible(actor, SEX_PART_JAWS))
 			return FALSE
@@ -227,6 +231,13 @@
 		if(!actor.getorganslot(ORGAN_SLOT_BREASTS))
 			return FALSE
 		if(user == actor && !is_part_self_accessible(user, SEX_PART_BREASTS))
+			return FALSE
+		needs_chest_check = TRUE
+	if(parts_to_check & SEX_PART_BREAST_HOLE)
+		var/obj/item/organ/breasts/milk_hole_breasts = actor.getorganslot(ORGAN_SLOT_BREASTS)
+		if(!milk_hole_breasts?.has_milk_hole)
+			return FALSE
+		if(user == actor && !is_part_self_accessible(user, SEX_PART_BREAST_HOLE))
 			return FALSE
 		needs_chest_check = TRUE
 	if(parts_to_check & SEX_PART_CHEST)

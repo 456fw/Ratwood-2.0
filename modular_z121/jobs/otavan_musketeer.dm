@@ -78,5 +78,5 @@
 // 法刀出生时已经入鞘，不占用双手，也不改变普通剑鞘的行为。
 /obj/item/rogueweapon/scabbard/sword/z121_otavan_musketeer/Initialize(mapload)
 	. = ..()
-	sheathed = new /obj/item/rogueweapon/sword/short/falchion(src)
+	hol_comp.sheathed = new /obj/item/rogueweapon/sword/short/falchion(src)
 	update_icon()
