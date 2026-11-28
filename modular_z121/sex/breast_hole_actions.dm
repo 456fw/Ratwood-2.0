@@ -40,6 +40,11 @@
 			"[owner] 的乳穴被指尖一碰，一缕乳白的乳汁先渗了出来。",
 			"穴口泛起一点乳白，温热的乳汁正慢慢往外渗。",
 		))
+	if(context == "double")
+		return pick(list(
+			"[owner] 的两个乳穴被同时挤得一缩，乳白的乳汁从两边穴口一起渗了出来。",
+			"左右两处穴口同时泛起乳白，温热的乳汁慢慢往外渗。",
+		))
 	return pick(list(
 		"[owner] 的乳穴被挤得一缩，一缕乳白的乳汁先从穴口渗了出来。",
 		"穴口泛起一点乳白，温热的乳汁正慢慢往外渗。",
@@ -50,6 +55,14 @@
 	var/heavy = force >= SEX_FORCE_HIGH
 	var/list/lines
 	switch(context)
+		if("double")
+			lines = heavy ? list(
+				"两边的乳穴一起被操得发颤，乳汁顺着 [owner] 的乳肉两边往下流。",
+				"两根肉棒把两个乳穴都撑得发红，乳汁混着体液从两边往外冒。",
+			) : list(
+				"两个乳穴都泛起乳白，乳汁随着抽送一点点从两边渗出来。",
+				"左右两处穴口都被磨得湿亮，乳汁一滴滴向下淌。",
+			)
 		if("ride")
 			lines = heavy ? list(
 				"[owner] 每起伏一次，乳穴就挤出一小股乳汁，顺着 [partner] 的小腹往下滑。",
@@ -117,7 +130,12 @@
 	return pick(lines)
 
 /// 高潮/射精时的乳汁补充描写。
-/proc/breast_hole_milk_ejac_line(mob/living/carbon/human/owner)
+/proc/breast_hole_milk_ejac_line(mob/living/carbon/human/owner, context = "fuck")
+	if(context == "double")
+		return pick(list(
+			"混着乳汁的白浊随即从两边穴口一起溢了出来。",
+			"滚烫的精液把两个乳穴里的乳汁一并顶了出来，从两边往外冒。",
+		))
 	return pick(list(
 		"混着乳汁的白浊随即从穴口溢了出来。",
 		"滚烫的精液把乳汁一并顶了出来，顺着乳穴往外冒。",
@@ -129,6 +147,11 @@
 		return pick(list(
 			"穴口一松，乳汁混着体液从乳穴里淌了出来。",
 			"乳白的乳汁顺着 [owner] 的胸口滑下，留下一道湿痕。",
+		))
+	if(context == "double")
+		return pick(list(
+			"两边穴口一松，乳汁混着体液同时从两个乳穴里淌了出来。",
+			"乳白的乳汁顺着 [owner] 的两边胸口滑下，各留下一道湿痕。",
 		))
 	return pick(list(
 		"穴口一松，乳汁混着体液从乳穴里淌了出来。",
@@ -203,10 +226,10 @@
 	return FALSE
 
 // ----------------------------------------------------------------------------
-// 插入（双屌）：只有拥有双屌的角色才显示
+// 插入（双屌）：两根肉棒分别插入左右两个乳穴，只有拥有双屌的角色才显示
 // ----------------------------------------------------------------------------
 /datum/sex_action/breast_hole_sex/double
-	name = "用双根肉棒抽插对方乳穴"
+	name = "用双根肉棒分别抽插对方两个乳穴"
 
 /datum/sex_action/breast_hole_sex/double/shows_on_menu(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	if(!user.sexcon.double_penis_type())
@@ -219,9 +242,9 @@
 	return ..()
 
 /datum/sex_action/breast_hole_sex/double/on_start(mob/living/carbon/human/user, mob/living/carbon/human/target)
-	var/start_message = "[user] 把两根阴茎并拢，一点点挤进 [target] 的乳穴，穴口被撑到了极限。"
+	var/start_message = "[user] 把两根肉棒分别对准 [target] 左右两个乳穴，缓缓顶了进去，两处穴口同时被撑开。"
 	if(breast_hole_is_lactating(target))
-		start_message += " " + breast_hole_milk_start_line(target, "fuck")
+		start_message += " " + breast_hole_milk_start_line(target, "double")
 	user.visible_message(span_warning(start_message))
 	playsound(target, list('sound/misc/mat/insert (1).ogg','sound/misc/mat/insert (2).ogg'), 20, TRUE, ignore_walls = FALSE)
 
@@ -229,15 +252,15 @@
 	var/message
 	switch(user.sexcon.force)
 		if(SEX_FORCE_LOW)
-			message = "[user] 用两根阴茎缓慢地在 [target] 的乳穴里磨蹭，被撑开的软肉一收一放地含着它们。"
+			message = "[user] 的两根肉棒在 [target] 的两个乳穴里一左一右地缓慢抽送，软肉各自含吮着它们。"
 		if(SEX_FORCE_MID)
-			message = "[user] 的双屌在 [target] 的乳穴里交替抽送，撑满的胀感让 [target] 的呼吸变得又急又乱。"
+			message = "[user] 让双屌分别在 [target] 的两个乳穴里交替进出，撑满的胀感从两边同时涌上来。"
 		if(SEX_FORCE_HIGH)
-			message = "[user] 用双屌操得 [target] 的乳穴汁水四溢，肉壁被挤得发红，连胸口都在发颤。"
+			message = "[user] 用力抽送着 [target] 的两个乳穴，两根肉棒一进一出，把两边胸口都撞得发颤。"
 		if(SEX_FORCE_EXTREME to SEX_FORCE_LUDICROUS)
-			message = "[user] 近乎粗暴地把双屌一次次顶进 [target] 的乳穴，撑得那处软肉再也合不拢。"
+			message = "[user] 近乎粗暴地把两根肉棒分别顶进 [target] 的两个乳穴深处，撑得两处软肉都合不拢。"
 	if(breast_hole_is_lactating(target))
-		message += " " + breast_hole_milk_perform_line(target, user, user.sexcon.force, "fuck")
+		message += " " + breast_hole_milk_perform_line(target, user, user.sexcon.force, "double")
 	user.sexcon_action_message(user.sexcon.spanify_force(message))
 	user.sexcon.intercourse_noise(target, TRUE)
 	user.sexcon.do_thrust_animate(target)
@@ -248,9 +271,9 @@
 
 	user.sexcon.perform_sex_action(user, 2, 0, TRUE)
 	if(user.sexcon.check_active_ejaculation())
-		var/ejac_message = "[user] 两根阴茎先后泄出，把滚烫的精液一股股灌进 [target] 的乳穴！"
+		var/ejac_message = "[user] 两根肉棒先后泄出，把滚烫的精液分别灌进 [target] 的两个乳穴！"
 		if(breast_hole_is_lactating(target))
-			ejac_message += " " + breast_hole_milk_ejac_line(target)
+			ejac_message += " " + breast_hole_milk_ejac_line(target, "double")
 		user.visible_message(span_love(ejac_message))
 		for(var/i = 1; i <= user.sexcon.get_load_bursts(); i++)
 			user.sexcon.cum_into(splashed_user = target, orifice = SEX_PART_BREAST_HOLE, skip_knot_try = TRUE, consume_charge = i == 1 ? TRUE : FALSE)
@@ -263,9 +286,9 @@
 	target.sexcon.handle_passive_ejaculation()
 
 /datum/sex_action/breast_hole_sex/double/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
-	var/finish_message = "[user] 抽出双屌，乳穴被撑出的形状一时没能合上，白浊顺着穴口往外淌。"
+	var/finish_message = "[user] 抽出双屌，两个乳穴被撑出的形状一时都没合上，白浊从两边穴口往外淌。"
 	if(breast_hole_is_lactating(target))
-		finish_message += " " + breast_hole_milk_finish_line(target, "fuck")
+		finish_message += " " + breast_hole_milk_finish_line(target, "double")
 	user.visible_message(span_warning(finish_message))
 
 // ----------------------------------------------------------------------------
